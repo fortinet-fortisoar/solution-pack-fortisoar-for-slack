@@ -1,0 +1,52 @@
+{
+    "name": "fortiSOARForSlack",
+    "version": "1.0.0",
+    "fsrMinCompatibility": "7.2.0",
+    "type": "solutionpack",
+    "local": true,
+    "label": "FortiSOAR For Slack",
+    "dependencies": [
+        {
+            "name": "sOARFramework",
+            "type": "solutionpack",
+            "label": "SOAR Framework",
+            "minVersion": null
+        }
+    ],
+    "prerequisite": null,
+    "publisher": "Community",
+    "description": "FortiSOAR for Slack application allows teams to leverage the power of FortiSOAR as part of their daily communications.",
+    "help": null,
+    "category": [
+        "Communication"
+    ],
+    "supportInfo": null,
+    "iconLarge": null,
+    "postInstallConfig": null,
+    "date": "2023-01-02T11:43:58+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "Communication Type"
+            }
+        ],
+        "playbooks": [
+            {
+                "name": "02 - Use Case - Slack Bot"
+            }
+        ],
+        "globalVariables": [],
+        "rules": [
+            "Slack"
+        ],
+        "ruleChannels": [
+            "Slack Channel"
+        ],
+        "connectors": [
+            {
+                "name": "Slack",
+                "apiName": "slack"
+            }
+        ]
+    }
+}

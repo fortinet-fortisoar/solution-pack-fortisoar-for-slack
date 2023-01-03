@@ -1,0 +1,151 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create Indicator",
+    "aliasName": null,
+    "tag": null,
+    "description": "Gets triggered on createIndicator command when used in slack",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "Artifact"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/49291f43-e8a1-4f63-80b5-d88e05044a4a",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/978b6805-b07f-4876-b9aa-546ff464c163",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Indicator",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Extract_Artifact.data.results}}",
+                    "__bulk": true,
+                    "condition": "",
+                    "batch_size": 100
+                },
+                "resource": {
+                    "tlp": "\/api\/3\/picklists\/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
+                    "value": "{{vars.item.value}}",
+                    "__replace": "true",
+                    "indicatorStatus": "\/api\/3\/picklists\/2f5cff61-fbff-4bb3-96be-302b78a9fb47",
+                    "typeofindicator": "{{vars.item['picklist_iri']}}",
+                    "enrichmentStatus": "\/api\/3\/picklists\/a6d9da29-27b1-4b8a-965d-8d91518540d5"
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/indicators",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "220",
+            "left": "980",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "35b8cf2b-8b74-4e2b-9d20-fc0e588f5689"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Extract Artifact",
+            "description": null,
+            "arguments": {
+                "name": "Utilities",
+                "params": {
+                    "data": "{{vars.input.params.Artifact}}",
+                    "whitelist": "",
+                    "case_sensitive": false,
+                    "override_regex": false,
+                    "private_whitelist": true
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "extract_artifacts",
+                "operationTitle": "FSR: Extract Artifacts from String",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "178",
+            "left": "662",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "53cdd8f7-068e-4a86-859e-1652ee2e44a3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "40",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "978b6805-b07f-4876-b9aa-546ff464c163"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": [],
+            "status": null,
+            "top": "121",
+            "left": "370",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "d64ec03a-f3d6-43c7-8859-09796e5b5a09"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Extract Artifact -> Create Indicator",
+            "targetStep": "\/api\/3\/workflow_steps\/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
+            "sourceStep": "\/api\/3\/workflow_steps\/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "574a84ef-8a4d-412e-ad1a-4fd71234fff0"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/d64ec03a-f3d6-43c7-8859-09796e5b5a09",
+            "sourceStep": "\/api\/3\/workflow_steps\/978b6805-b07f-4876-b9aa-546ff464c163",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "84ed4683-55e9-4bcf-a4c4-641eedefc526"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Extract Artifact",
+            "targetStep": "\/api\/3\/workflow_steps\/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
+            "sourceStep": "\/api\/3\/workflow_steps\/d64ec03a-f3d6-43c7-8859-09796e5b5a09",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "8a4b46b4-3f25-496a-917d-9816ddbe6412"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "a293b1d7-4fef-47a8-8632-cc8893e355e3",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "createIndicator",
+        "bot_enable"
+    ]
+}

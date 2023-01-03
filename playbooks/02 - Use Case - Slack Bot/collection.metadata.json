@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "02 - Use Case - Slack Bot",
+    "description": null,
+    "visible": true,
+    "image": null,
+    "uuid": "49291f43-e8a1-4f63-80b5-d88e05044a4a",
+    "deletedAt": null,
+    "recordTags": []
+}

@@ -1,0 +1,53 @@
+{
+    "uuid": "703dbd1a-2150-4a72-a0a1-e8521295b53c",
+    "name": "Slack",
+    "entity_type": "manualinput",
+    "event_type": "create",
+    "trigger_condition": {
+        "sort": [],
+        "limit": 30,
+        "logic": "AND",
+        "filters": [
+            {
+                "type": "primitive",
+                "field": "unauthenticated_input",
+                "value": true,
+                "operator": "eq",
+                "_operator": "eq"
+            },
+            {
+                "type": "object",
+                "field": "externalChannelList",
+                "value": "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586",
+                "_value": {
+                    "@id": "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586",
+                    "display": "Slack",
+                    "itemValue": "Slack"
+                },
+                "operator": "eq"
+            }
+        ]
+    },
+    "actions": [
+        {
+            "type": "connector",
+            "params": {
+                "input": "{{vars.input.record}}"
+            },
+            "enabled": true,
+            "channel_uuid": "6fac158d-6f24-4a65-ae1f-0c9565fc710f"
+        }
+    ],
+    "is_system": false,
+    "is_active": true,
+    "priority": 10,
+    "event_source": "sealab",
+    "source": null,
+    "channel_preference_field": null,
+    "visible": true,
+    "category": "generic",
+    "expiry": null,
+    "entity_id": null,
+    "parent_rule": null,
+    "workflow": null
+}
