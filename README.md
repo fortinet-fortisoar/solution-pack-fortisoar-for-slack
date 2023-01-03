@@ -1,16 +1,12 @@
 ## Release Information
 
-- **Version**: 2.0.0
+- **Version**: 1.0.0
 
 - **Certified**: Yes
 
 - **Publisher**: Fortinet  
 
-- **Compatibility**: 7.2.2 and later
-
-- **Applicable**: Dashboards
-
-- [Release Notes](./widget/release_notes.md)
+- **Compatibility**: 7.3.1
 
 
 ## Overview

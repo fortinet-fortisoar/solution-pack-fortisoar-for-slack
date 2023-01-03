@@ -1,7 +1,7 @@
 {
     "name": "fortiSOARForSlack",
     "version": "1.0.0",
-    "fsrMinCompatibility": "7.2.0",
+    "fsrMinCompatibility": "7.3.1",
     "type": "solutionpack",
     "local": true,
     "label": "FortiSOAR For Slack",
