@@ -6,7 +6,7 @@
     "tag": null,
     "description": "Gets triggered on createAlert command when used in slack",
     "isActive": true,
-    "debug": false,
+    "debug": true,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [],
@@ -15,85 +15,6 @@
     "versions": [],
     "triggerStep": "\/api\/3\/workflow_steps\/f72c5b28-2cbb-4593-af83-5c2c44bc599d",
     "steps": [
-        {
-            "@type": "WorkflowStep",
-            "name": "Alert Manual Input Form",
-            "description": null,
-            "arguments": {
-                "type": "InputBased",
-                "input": {
-                    "schema": {
-                        "title": "Create Alert",
-                        "description": "Alert Name",
-                        "inputVariables": [
-                            {
-                                "name": "alertName",
-                                "type": "string",
-                                "label": "Alert Name",
-                                "tooltip": "",
-                                "dataType": "text",
-                                "formType": "text",
-                                "required": false,
-                                "_expanded": true,
-                                "defaultValue": null,
-                                "_previousName": "alertNme",
-                                "useRecordFieldDefault": false
-                            },
-                            {
-                                "name": "alertDescription",
-                                "type": "string",
-                                "label": "Alert Description",
-                                "tooltip": "",
-                                "dataType": "text",
-                                "formType": "text",
-                                "required": false,
-                                "_expanded": true,
-                                "defaultValue": null,
-                                "_previousName": "",
-                                "useRecordFieldDefault": false
-                            }
-                        ]
-                    }
-                },
-                "record": "",
-                "agent_id": null,
-                "owner_detail": {
-                    "isAssigned": false,
-                    "emailRecipients": "{{vars.bot_context.user_id}}",
-                    "externalRecipients": "{{vars.bot_context.user_id}}"
-                },
-                "isRecordLinked": false,
-                "step_variables": [],
-                "response_mapping": {
-                    "options": [
-                        {
-                            "option": "Create Alert Record",
-                            "step_iri": "\/api\/3\/workflow_steps\/c16b21f7-609f-431d-a480-7a98f4b5fa7f"
-                        }
-                    ],
-                    "duplicateOption": false
-                },
-                "inlineChannelList": [
-                    "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586"
-                ],
-                "inputExternalUser": true,
-                "email_notification": {
-                    "enabled": false,
-                    "smtpParameters": []
-                },
-                "inputInternalUsers": true,
-                "externalChannelList": [
-                    "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586"
-                ],
-                "unauthenticated_input": true
-            },
-            "status": null,
-            "top": "140",
-            "left": "660",
-            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
-            "group": null,
-            "uuid": "46882ab9-d0f8-423b-9394-c5c86137ad43"
-        },
         {
             "@type": "WorkflowStep",
             "name": "Create Alert Record",
@@ -120,8 +41,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "240",
-            "left": "1000",
+            "top": "30",
+            "left": "1100",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "8b152f36-c11c-41c3-b528-6cae74ee7957"
@@ -131,14 +52,107 @@
             "name": "Configurations",
             "description": null,
             "arguments": {
-                "channel_name": "{{vars.bot_context.channel_id}}"
+                "user_id": "{{vars.bot_context.user_id}}"
             },
             "status": null,
-            "top": "100",
-            "left": "360",
+            "top": "30",
+            "left": "450",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "9a6f0427-e3ab-4bad-9e91-4a25116a0381"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Alert Manual Input Form",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Alert Details",
+                        "description": "Alert Details",
+                        "inputVariables": [
+                            {
+                                "name": "alertName",
+                                "type": "string",
+                                "label": "Alert Name",
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "text",
+                                "required": false,
+                                "_expanded": true,
+                                "defaultValue": null,
+                                "_previousName": "alert",
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "alertDescription",
+                                "type": "string",
+                                "label": "Alert Description",
+                                "tooltip": "",
+                                "dataType": "text",
+                                "formType": "text",
+                                "required": false,
+                                "_expanded": true,
+                                "defaultValue": null,
+                                "_previousName": "a",
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "",
+                "agent_id": null,
+                "owner_detail": {
+                    "isAssigned": false,
+                    "emailRecipients": "ypatodkar@fortinet.com",
+                    "externalRecipients": "ypatodkar@fortinet.com"
+                },
+                "isRecordLinked": false,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Create Alert",
+                            "step_iri": "\/api\/3\/workflow_steps\/8b152f36-c11c-41c3-b528-6cae74ee7957"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "inputExternalUser": true,
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inputInternalUsers": true,
+                "inline_channel_list": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
+                ],
+                "external_channel_list": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
+                ],
+                "unauthenticated_input": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "b0c72f39-09d3-47e0-9a63-e0144fa4e5d3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Response",
+            "description": null,
+            "arguments": {
+                "bot_response": "{\n\t\"blocks\": [\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"Done! Alert, '{{vars.steps.Alert_Manual_Input_Form.input.alertName}}' successfully created. <https:\/\/{{globalVars.Server_fqhn}}\/modules\/alerts\/{{vars.steps.Create_Alert_Record.uuid}} | View Alert>\"\n\t\t\t}\n\t\t}\n\t]\n}"
+            },
+            "status": null,
+            "top": "30",
+            "left": "1425",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "ce42536b-92c9-4f0e-81ce-25653bf9e1f5"
         },
         {
             "@type": "WorkflowStep",
@@ -152,8 +166,8 @@
                 }
             },
             "status": null,
-            "top": "40",
-            "left": "40",
+            "top": "30",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
             "group": null,
             "uuid": "f72c5b28-2cbb-4593-af83-5c2c44bc599d"
@@ -162,12 +176,30 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Alert Manual Input Form -> Create Alert Record",
-            "targetStep": "\/api\/3\/workflow_steps\/8b152f36-c11c-41c3-b528-6cae74ee7957",
-            "sourceStep": "\/api\/3\/workflow_steps\/46882ab9-d0f8-423b-9394-c5c86137ad43",
+            "name": "Create Alert Record -> Response",
+            "targetStep": "\/api\/3\/workflow_steps\/ce42536b-92c9-4f0e-81ce-25653bf9e1f5",
+            "sourceStep": "\/api\/3\/workflow_steps\/8b152f36-c11c-41c3-b528-6cae74ee7957",
             "label": null,
             "isExecuted": false,
-            "uuid": "371bb7b3-434a-42ce-9f64-fc52352ec586"
+            "uuid": "0c0eed9c-d412-494b-8354-37b5dfcf3811"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configurations -> Alert Manual Input Form",
+            "targetStep": "\/api\/3\/workflow_steps\/b0c72f39-09d3-47e0-9a63-e0144fa4e5d3",
+            "sourceStep": "\/api\/3\/workflow_steps\/9a6f0427-e3ab-4bad-9e91-4a25116a0381",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "88feb12f-f721-41d2-bdd2-53c26a8a8625"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Alert Manual Input Form -> Create Alert Record",
+            "targetStep": "\/api\/3\/workflow_steps\/8b152f36-c11c-41c3-b528-6cae74ee7957",
+            "sourceStep": "\/api\/3\/workflow_steps\/b0c72f39-09d3-47e0-9a63-e0144fa4e5d3",
+            "label": "Create Alert",
+            "isExecuted": false,
+            "uuid": "96fea064-efcc-4413-98e8-357b1b88d066"
         },
         {
             "@type": "WorkflowRoute",
@@ -177,15 +209,6 @@
             "label": null,
             "isExecuted": false,
             "uuid": "b46ff685-cd8f-4ad0-a75f-528136e69f4a"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Configurations -> Alert Manual Input Form",
-            "targetStep": "\/api\/3\/workflow_steps\/46882ab9-d0f8-423b-9394-c5c86137ad43",
-            "sourceStep": "\/api\/3\/workflow_steps\/9a6f0427-e3ab-4bad-9e91-4a25116a0381",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "d5913426-3e20-458c-9b14-39e42c9a4d7e"
         }
     ],
     "groups": [],

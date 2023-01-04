@@ -14,17 +14,6 @@
                 "value": true,
                 "operator": "eq",
                 "_operator": "eq"
-            },
-            {
-                "type": "object",
-                "field": "externalChannelList",
-                "value": "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586",
-                "_value": {
-                    "@id": "\/api\/3\/picklists\/965b4067-029b-40a2-b616-72f834e85586",
-                    "display": "Slack",
-                    "itemValue": "Slack"
-                },
-                "operator": "eq"
             }
         ]
     },
