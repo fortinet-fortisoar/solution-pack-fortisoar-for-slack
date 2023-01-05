@@ -276,8 +276,8 @@
                 "agent_id": null,
                 "owner_detail": {
                     "isAssigned": false,
-                    "emailRecipients": "ypatodkar@fortinet.com",
-                    "externalRecipients": "ypatodkar@fortinet.com"
+                    "emailRecipients": "{{vars.bot_context.user_id}}",
+                    "externalRecipients": "{{vars.bot_context.user_id}"
                 },
                 "isRecordLinked": false,
                 "step_variables": [],
