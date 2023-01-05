@@ -58,7 +58,7 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Check Length of Indicator",
+            "name": "Check Number of Indicator",
             "description": null,
             "arguments": {
                 "conditions": [
