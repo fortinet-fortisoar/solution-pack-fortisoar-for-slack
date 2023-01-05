@@ -19,29 +19,29 @@
     "description": "FortiSOAR for Slack application allows teams to leverage the power of FortiSOAR as part of their daily communications.",
     "help": null,
     "category": [
-        "Communication"
+        "Communication and Coordination"
     ],
     "supportInfo": "Fortinet Customer Support",
     "iconLarge": null,
     "postInstallConfig": null,
-    "date": "2023-01-02T11:43:58+00:00",
+    "date": "2023-01-05T09:32:36+00:00",
     "contents": {
         "picklistNames": [
             {
-                "name": "Communication Type"
+                "name": "External Channel"
             }
         ],
         "playbooks": [
             {
-                "name": "02 - Use Case - Slack Bot"
+                "name": "02 - Use Case - FortiSOAR for Slack"
             }
         ],
         "globalVariables": [],
         "rules": [
-            "Slack"
+            "Slack > Notify For External Manual Input"
         ],
         "ruleChannels": [
-            "Slack Channel"
+            "Slack"
         ],
         "connectors": [
             {

@@ -1,11 +1,11 @@
 {
     "uuid": "6fac158d-6f24-4a65-ae1f-0c9565fc710f",
     "type": "connector",
-    "name": "Slack Channel",
+    "name": "Slack",
     "description": "",
     "config": {
         "label": "Slack",
-        "config": "1f79c83e-98da-47bf-9bb1-b32c735a6fa9",
+        "config": "",
         "version": "3.0.0",
         "connector": "slack",
         "operation": "send_input"

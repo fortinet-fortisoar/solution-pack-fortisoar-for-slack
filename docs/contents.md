@@ -22,13 +22,13 @@ The FortiSOAR for Slack includes the following rules:
 - Slack - It Sends a notification to the slack application whne the Manual Input step for Slack is triggered.
 
 ## Picklists
-- Communication Type
+- External Channel
 
 ## Playbook Collection
 
 |Playbook Collection Name |
 | :- |
-| 02 - Use Case - Slack Bot |
+| 02 - Use Case - FortiSOAR for Slack |
 
 **Playbook Name**|**Description**|
 | :- | :- |
