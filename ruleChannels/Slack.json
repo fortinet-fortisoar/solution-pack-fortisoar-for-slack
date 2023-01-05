@@ -5,7 +5,7 @@
     "description": "",
     "config": {
         "label": "Slack",
-        "config": "633e8bd0-a5d0-48a0-addd-2bc7174b9ceb",
+        "config": "",
         "version": "3.0.0",
         "connector": "slack",
         "operation": "send_input"
