@@ -28,12 +28,12 @@
     "contents": {
         "picklistNames": [
             {
-                "name": "Communication Type"
+                "name": "External Channel"
             }
         ],
         "playbooks": [
             {
-                "name": "02 - Use Case - Slack Bot"
+                "name": "02 - Use Case - FortiSOAR for Slack"
             }
         ],
         "globalVariables": [],
