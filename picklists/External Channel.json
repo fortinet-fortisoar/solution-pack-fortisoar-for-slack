@@ -2,7 +2,7 @@
     "@context": "\/api\/3\/contexts\/PicklistName",
     "@id": "\/api\/3\/picklist_names\/80d5768c-c5a2-44a7-9177-97da0332282a",
     "@type": "PicklistName",
-    "name": "Bot Channel",
+    "name": "External Channel",
     "system": true,
     "picklists": [
         {
