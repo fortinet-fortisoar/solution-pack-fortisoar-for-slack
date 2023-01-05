@@ -1,6 +1,6 @@
 {
     "uuid": "703dbd1a-2150-4a72-a0a1-e8521295b53c",
-    "name": "Slack",
+    "name": "Slack > Notify For External Manual Input",
     "entity_type": "manualinput",
     "event_type": "create",
     "trigger_condition": {
