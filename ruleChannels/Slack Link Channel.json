@@ -1,0 +1,22 @@
+{
+    "uuid": "79fb4d6e-d7b1-4e22-9ad4-6a0f96fabaea",
+    "type": "connector",
+    "name": "Slack Link Channel",
+    "description": "",
+    "config": {
+        "label": "Slack",
+        "config": "",
+        "version": "3.0.0",
+        "connector": "slack",
+        "operation": "send_message"
+    },
+    "is_active": true,
+    "default_params": {
+        "blocks": [],
+        "channel": "",
+        "message": "",
+        "email_id": "",
+        "thread_ts": "",
+        "attachments": []
+    }
+}

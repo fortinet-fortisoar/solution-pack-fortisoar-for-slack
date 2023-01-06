@@ -38,15 +38,25 @@
         ],
         "globalVariables": [],
         "rules": [
-            "Slack > Notify For External Manual Input"
+            "Slack > Notify For External Manual Input",
+            "Slack > Notify For Link"
         ],
         "ruleChannels": [
-            "Slack"
+            "Slack",
+            "Slack Link Channel"
         ],
         "connectors": [
             {
+                "name": "IPStack",
+                "apiName": "ipstack"
+            },
+            {
                 "name": "Slack",
                 "apiName": "slack"
+            },
+            {
+                "name": "VirusTotal",
+                "apiName": "virustotal"
             }
         ]
     }

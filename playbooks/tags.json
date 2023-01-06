@@ -1,5 +1,6 @@
 [
-    "createAlert",
     "bot_enable",
-    "createIndicator"
+    "createIndicator",
+    "createAlert",
+    "enrichIP"
 ]
