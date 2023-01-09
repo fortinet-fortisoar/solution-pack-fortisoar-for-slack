@@ -39,7 +39,7 @@
         "globalVariables": [],
         "rules": [
             "Slack > Notify For External Manual Input",
-            "Slack > Notify For Link"
+            "Slack > Send Manual Input Link To Slack"
         ],
         "ruleChannels": [
             "Slack",
