@@ -1,0 +1,386 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Enrich IP From Slack",
+    "aliasName": null,
+    "tag": null,
+    "description": "Reference playbook that gets triggered from Slack based and provides latest reputation formatted for Slack",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "indicatorVal"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/49291f43-e8a1-4f63-80b5-d88e05044a4a",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/9a7b6073-2327-4c57-b777-52d859de34a2",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Is Indicator Present",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "value",
+                            "value": "{{vars.indicator_val}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "indicators?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "0d80d1e0-10b5-4ca3-958a-110936694c31"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Parameters Required",
+            "description": null,
+            "arguments": {
+                "bot_response": "Done! Indicator '{{vars.indicator_val}}' successfully added to the indicator list.'{{vars.steps.Get_IP_Rep.data.attributes.continent}}' and '{{vars.steps.Get_IP_Rep.data.attributes.country}}'"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "22c31e3a-185b-4e92-85d6-eaeb274323ed"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "indicator_val": "{{vars.input.params.indicatorVal}}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "4ef5d615-e8c3-47fd-ba10-1dd5f794be54"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Send Formatted Response To Slack",
+            "description": null,
+            "arguments": {
+                "name": "Slack",
+                "config": "63e0e0a1-9762-41f1-b8f8-bb4ccb618c5b",
+                "params": {
+                    "blocks": "{{vars.bot_response}}",
+                    "channel": "{{vars.bot_context.user_id}}",
+                    "message": "Done!",
+                    "email_id": "",
+                    "thread_ts": "",
+                    "attachments": ""
+                },
+                "version": "3.0.0",
+                "connector": "slack",
+                "operation": "send_message",
+                "operationTitle": "Send Message",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1245",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "6256fa5f-f779-4e7a-9aaa-f608fd5c410c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get IP Reputation",
+            "description": null,
+            "arguments": {
+                "name": "VirusTotal",
+                "config": "65bb6368-2129-43ef-9721-862ca7ab6510",
+                "params": {
+                    "ip": "{{vars.indicator_val}}",
+                    "relationships": ""
+                },
+                "version": "3.0.2",
+                "connector": "virustotal",
+                "operation": "query_ip",
+                "operationTitle": "Get IP Reputation",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "6623aa7b-f366-4de2-a5ad-716bac80eadf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Rep IPStack",
+            "description": null,
+            "arguments": {
+                "name": "IPStack",
+                "config": "4e592413-69da-4cac-9a10-5bf2e634512d",
+                "params": {
+                    "query": "{{vars.indicator_val}}",
+                    "fields": "",
+                    "enable_hostname": true,
+                    "enable_security": false
+                },
+                "version": "1.0.1",
+                "connector": "ipstack",
+                "operation": "ip_locate",
+                "ignore_errors": true,
+                "operationTitle": "Geolocate IP",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Formatted Response",
+            "description": null,
+            "arguments": {
+                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Below is the latest indicator reputation summary for IP {{vars.indicator_val}}:*\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Virus Total Reputation Summary *\\nHarmless Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].harmless}} \\n Malicious Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].malicious}} \\n Suspicious Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].suspicious}} \\n Country: {{vars.steps.Get_IP_Reputation.data.attributes.country}} \\n Regional Internet Registry: {{vars.steps.Get_IP_Reputation.data.attributes['regional_internet_registry']}}\"\n\t\t\t},\n\t\t\t\"accessory\": {\n\t\t\t\t\"type\": \"image\",\n\t\t\t\t\"image_url\": \"https:\/\/res.cloudinary.com\/crunchbase-production\/image\/upload\/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1\/vxwo4yr27optg1jldgjf\",\n\t\t\t\t\"alt_text\": \"alt text for image\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"<{{vars.steps.Get_IP_Reputation.data.links.self}}|View Results In VT>\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*IP Stack Gelocation Summary*\\n Zip:{{vars.steps.Get_Rep_IPStack.data[0].zip}} \\n City:{{vars.steps.Get_Rep_IPStack.data[0].city}}\\n Type:{{vars.steps.Get_Rep_IPStack.data[0].type}}\\n Hostname:{{vars.steps.Get_Rep_IPStack.data[0].hostname}}\\n Latitude:{{vars.steps.Get_Rep_IPStack.data[0].latitude}}\\n Longitude:{{vars.steps.Get_Rep_IPStack.data[0].longitude}}\\n Region Name:23\\n Country Name:{{vars.steps.Get_Rep_IPStack.data[0]['country_name']}}\\n Continent:{{vars.steps.Get_Rep_IPStack.data[0]['continent_name']}}\"\n\t\t\t},\n\t\t\t\"accessory\": {\n\t\t\t\t\"type\": \"image\",\n\t\t\t\t\"image_url\": \"https:\/\/img.stackshare.io\/service\/9074\/ipstack.png\",\n\t\t\t\t\"alt_text\": \"alt text for image\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t}\n\t]"
+            },
+            "status": null,
+            "top": "1110",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "7e902b27-bbfb-4a9e-b541-1f0353375d34"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Are Parameters Passed",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Yes",
+                        "step_iri": "\/api\/3\/workflow_steps\/4ef5d615-e8c3-47fd-ba10-1dd5f794be54",
+                        "condition": "{{ vars.input.params | length > 0 }}",
+                        "step_name": "Configuration"
+                    },
+                    {
+                        "option": "Params Not Passed",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/22c31e3a-185b-4e92-85d6-eaeb274323ed",
+                        "step_name": "Parameters Required"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "165",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
+            "uuid": "86061fc2-cbef-4473-bfa7-b50e3571c6e6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Is Indicator Available",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Yes",
+                        "step_iri": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+                        "condition": "{{ vars.steps.Is_Indicator_Present |length > 0 }}",
+                        "step_name": "Get IP Reputation"
+                    },
+                    {
+                        "option": "Not available",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+                        "step_name": "Create New Indicator"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "570",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
+            "uuid": "8a0ae81b-1d0c-45d1-a881-531effdb1630"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "9a7b6073-2327-4c57-b777-52d859de34a2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create New Indicator",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "tlp": "\/api\/3\/picklists\/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
+                    "value": "{{vars.indicator_val}}",
+                    "__replace": "",
+                    "reputation": "\/api\/3\/picklists\/ae98ebc6-beef-4882-9980-1d88fc6d87cd",
+                    "indicatorStatus": "\/api\/3\/picklists\/2f5cff61-fbff-4bb3-96be-302b78a9fb47",
+                    "typeofindicator": "\/api\/3\/picklists\/c0beeda4-2c7a-4214-b7e5-53ba1649539c",
+                    "enrichmentStatus": "\/api\/3\/picklists\/a6d9da29-27b1-4b8a-965d-8d91518540d5"
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/indicators",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "720",
+            "left": "820",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "a958cce8-cf06-4153-ba5b-90460792ca16"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Are Parameters Passed -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/4ef5d615-e8c3-47fd-ba10-1dd5f794be54",
+            "sourceStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "245be9f6-555e-4495-a841-1dd71b5147cc"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Are Parameters Passed",
+            "targetStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
+            "sourceStep": "\/api\/3\/workflow_steps\/9a7b6073-2327-4c57-b777-52d859de34a2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "69c12a46-7327-480a-b8be-36301139b1b2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Is Indicator Present",
+            "targetStep": "\/api\/3\/workflow_steps\/0d80d1e0-10b5-4ca3-958a-110936694c31",
+            "sourceStep": "\/api\/3\/workflow_steps\/4ef5d615-e8c3-47fd-ba10-1dd5f794be54",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "77134de2-25b6-48db-a2e9-6f88cc504035"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Are Parameters Passed -> Copy of Response",
+            "targetStep": "\/api\/3\/workflow_steps\/22c31e3a-185b-4e92-85d6-eaeb274323ed",
+            "sourceStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
+            "label": "Params Not Passed",
+            "isExecuted": false,
+            "uuid": "e145fbb1-0c17-45b5-ac4d-e7f29c0fcb89"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Indicator Present -> Is Indicator Available",
+            "targetStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "sourceStep": "\/api\/3\/workflow_steps\/0d80d1e0-10b5-4ca3-958a-110936694c31",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "e2693fe9-1f05-46a2-bfe5-f5eb75377af2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create New Indicator -> Get IP Reputation",
+            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c44fbde2-ec08-4e02-8e74-26e7dabd1308"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Indicator Available -> Get IP Reputation",
+            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "0a388e6d-9e6d-48df-b727-5c4e3ff96e0e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Indicator Available -> Create New Indicator",
+            "targetStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "label": "Not available",
+            "isExecuted": false,
+            "uuid": "c169a45f-b1bf-4da9-92d5-201fa49f8464"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy of Form Formatted Response -> Send Formatted Response To Slack",
+            "targetStep": "\/api\/3\/workflow_steps\/6256fa5f-f779-4e7a-9aaa-f608fd5c410c",
+            "sourceStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "2917c113-95a0-4dee-872b-da5e5e856f1f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get IP Reputation -> Get Rep IPStack",
+            "targetStep": "\/api\/3\/workflow_steps\/69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152",
+            "sourceStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "fb83b0e2-e8bb-4b53-a56b-9d43e475c7e2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Rep IPStack -> Formatted Response",
+            "targetStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
+            "sourceStep": "\/api\/3\/workflow_steps\/69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "349a96a1-2558-4ffd-91fb-25f5d652c963"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "a26e2d3a-bdff-41eb-9502-e9dab03584e9",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "bot_enabled",
+        "enrichIP"
+    ]
+}

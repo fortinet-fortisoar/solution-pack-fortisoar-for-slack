@@ -6,7 +6,7 @@
     "tag": null,
     "description": "Gets triggered on createIndicator command when used in slack",
     "isActive": true,
-    "debug": true,
+    "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [
@@ -153,7 +153,7 @@
             "name": "Cancel",
             "description": null,
             "arguments": {
-                "bot_response": "\"\""
+                "bot_response": "\" \""
             },
             "status": null,
             "top": "1380",
@@ -236,7 +236,7 @@
             "name": "Response",
             "description": null,
             "arguments": {
-                "bot_response": "Done! Indicator '{{vars.Indicator}}' successfully added to the indicator list."
+                "bot_response": "Done! Indicator '{{vars.indicator_val}}' successfully added to the indicator list."
             },
             "status": null,
             "top": "1380",
@@ -253,7 +253,7 @@
                 "type": "InputBased",
                 "input": {
                     "schema": {
-                        "title": "Indicator",
+                        "title": "Indicator Value",
                         "description": "Indicator Value",
                         "inputVariables": [
                             {
@@ -276,8 +276,8 @@
                 "agent_id": null,
                 "owner_detail": {
                     "isAssigned": false,
-                    "emailRecipients": "{{vars.bot_context.user_id}}",
-                    "externalRecipients": "{{vars.bot_context.user_id}"
+                    "emailRecipients": "",
+                    "externalRecipients": "{{vars.user_id}}"
                 },
                 "isRecordLinked": false,
                 "step_variables": [],
@@ -294,7 +294,7 @@
                     ],
                     "duplicateOption": false
                 },
-                "inputExternalUser": true,
+                "inputExternalUser": false,
                 "email_notification": {
                     "enabled": false,
                     "smtpParameters": []
@@ -303,14 +303,12 @@
                 "inline_channel_list": [
                     "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
                 ],
-                "external_channel_list": [
-                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
-                ],
+                "external_channel_list": [],
                 "unauthenticated_input": true
             },
             "status": null,
-            "top": "435",
-            "left": "650",
+            "top": "440",
+            "left": "640",
             "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
             "group": null,
             "uuid": "6925505d-310b-4f10-80bc-842da7046769"
@@ -352,11 +350,12 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
+                "user_id": "{{vars.bot_context.user_id}}",
                 "indicator_val": "{{vars.input.params.indicatorVal}}"
             },
             "status": null,
-            "top": "165",
-            "left": "743",
+            "top": "160",
+            "left": "740",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "d64ec03a-f3d6-43c7-8859-09796e5b5a09"
@@ -569,7 +568,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "bot_enable",
+        "bot_enabled",
         "createIndicator"
     ]
 }

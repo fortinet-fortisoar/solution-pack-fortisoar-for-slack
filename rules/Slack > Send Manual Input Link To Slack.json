@@ -1,0 +1,62 @@
+{
+    "uuid": "3eb67a77-9d93-4ba5-aa42-b54b3a6f77a8",
+    "name": "Slack > Send Manual Input Link To Slack",
+    "entity_type": "manualinput",
+    "event_type": "create",
+    "trigger_condition": {
+        "sort": [],
+        "limit": 30,
+        "logic": "AND",
+        "filters": [
+            {
+                "type": "primitive",
+                "field": "unauthenticated_input",
+                "value": true,
+                "operator": "eq",
+                "_operator": "eq"
+            },
+            {
+                "type": "array",
+                "field": "external_channel_list",
+                "value": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
+                ],
+                "module": "external_channel_list",
+                "display": "",
+                "operator": "in",
+                "template": "multiselectpicklist",
+                "OPERATOR_KEY": "$",
+                "useInOperator": true,
+                "previousOperator": "in",
+                "previousTemplate": "multiselectpicklist"
+            }
+        ]
+    },
+    "actions": [
+        {
+            "type": "connector",
+            "params": {
+                "blocks": "[ \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"A FortiSOAR playbook is requesting your input.\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \" Please provide your input using the following link:<https:\/\/{{vars.input.record.server_fqhn | ternary(vars.input.record.server_fqhn, globalVars.Server_fqhn)}}\/{{vars.input.record.agent_id | ternary('', 'input')}}?inputId={{vars.input.record.id}}&amp;token={{vars.input.record.token}} | Open input form>\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"Alternatively, copy\/paste this in your browser:\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"https:\/\/{{vars.input.record.server_fqhn | ternary(vars.input.record.server_fqhn, globalVars.Server_fqhn)}}\/{{vars.input.record.agent_id | ternary('', 'input')}}?inputId={{vars.input.record.id}}&amp;token={{vars.input.record.token}}\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"Regards,\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"FortiSOAR Admin.\" \t\t\t} \t\t} \t]",
+                "channel": "{{vars.input.record.input.bot_context.user_id}}",
+                "message": "Done!",
+                "email_id": "",
+                "thread_ts": "",
+                "attachments": []
+            },
+            "enabled": true,
+            "channel_uuid": "79fb4d6e-d7b1-4e22-9ad4-6a0f96fabaea"
+        }
+    ],
+    "is_system": false,
+    "is_active": true,
+    "priority": 10,
+    "event_source": "crudhub",
+    "source": null,
+    "channel_preference_field": null,
+    "visible": true,
+    "category": "generic",
+    "expiry": null,
+    "entity_id": null,
+    "parent_rule": null,
+    "workflow": null
+}
