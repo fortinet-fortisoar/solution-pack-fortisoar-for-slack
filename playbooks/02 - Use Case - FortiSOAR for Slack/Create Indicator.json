@@ -276,7 +276,7 @@
                 "agent_id": null,
                 "owner_detail": {
                     "isAssigned": false,
-                    "emailRecipients": "{{vars.user_id}}",
+                    "emailRecipients": "",
                     "externalRecipients": "{{vars.user_id}}"
                 },
                 "isRecordLinked": false,
@@ -294,7 +294,7 @@
                     ],
                     "duplicateOption": false
                 },
-                "inputExternalUser": true,
+                "inputExternalUser": false,
                 "email_notification": {
                     "enabled": false,
                     "smtpParameters": []
@@ -303,9 +303,7 @@
                 "inline_channel_list": [
                     "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
                 ],
-                "external_channel_list": [
-                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
-                ],
+                "external_channel_list": [],
                 "unauthenticated_input": true
             },
             "status": null,
