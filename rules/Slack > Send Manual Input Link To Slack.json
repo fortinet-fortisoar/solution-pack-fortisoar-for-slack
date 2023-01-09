@@ -1,6 +1,6 @@
 {
     "uuid": "3eb67a77-9d93-4ba5-aa42-b54b3a6f77a8",
-    "name": "Slack > Notify For Link",
+    "name": "Slack > Send Manual Input Link To Slack",
     "entity_type": "manualinput",
     "event_type": "create",
     "trigger_condition": {
@@ -11,9 +11,24 @@
             {
                 "type": "primitive",
                 "field": "unauthenticated_input",
-                "value": "true",
+                "value": true,
                 "operator": "eq",
                 "_operator": "eq"
+            },
+            {
+                "type": "array",
+                "field": "external_channel_list",
+                "value": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
+                ],
+                "module": "external_channel_list",
+                "display": "",
+                "operator": "in",
+                "template": "multiselectpicklist",
+                "OPERATOR_KEY": "$",
+                "useInOperator": true,
+                "previousOperator": "in",
+                "previousTemplate": "multiselectpicklist"
             }
         ]
     },

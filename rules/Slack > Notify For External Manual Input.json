@@ -14,6 +14,21 @@
                 "value": true,
                 "operator": "eq",
                 "_operator": "eq"
+            },
+            {
+                "type": "object",
+                "field": "external_channel_list",
+                "value": [
+                    "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
+                ],
+                "module": "external_channel_list",
+                "display": "",
+                "operator": "in",
+                "template": "multiselectpicklist",
+                "OPERATOR_KEY": "$",
+                "displayTemplate": "",
+                "previousOperator": "in",
+                "previousTemplate": "multiselectpicklist"
             }
         ]
     },
