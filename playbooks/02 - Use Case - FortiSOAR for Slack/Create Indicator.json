@@ -570,7 +570,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "bot_enable",
+        "bot_enabled",
         "createIndicator"
     ]
 }

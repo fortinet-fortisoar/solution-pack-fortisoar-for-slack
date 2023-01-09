@@ -360,6 +360,6 @@
     "deletedAt": null,
     "recordTags": [
         "createAlert",
-        "bot_enable"
+        "bot_enabled"
     ]
 }
