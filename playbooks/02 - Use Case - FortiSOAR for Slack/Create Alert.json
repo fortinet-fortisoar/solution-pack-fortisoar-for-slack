@@ -173,9 +173,9 @@
                 "agent_id": null,
                 "owner_detail": {
                     "isAssigned": false,
-                    "emailRecipients": "{{vars.bot_context.user_id}}",
+                    "emailRecipients": "{{vars.user_id}}",
                     "assignedToRecord": false,
-                    "externalRecipients": "{{vars.bot_context.user_id}}"
+                    "externalRecipients": "{{vars.user_id}}"
                 },
                 "isRecordLinked": false,
                 "step_variables": [],
