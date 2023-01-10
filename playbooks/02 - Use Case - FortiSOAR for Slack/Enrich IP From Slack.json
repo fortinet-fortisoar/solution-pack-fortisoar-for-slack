@@ -275,12 +275,39 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
+            "name": "Is Indicator Available -> Get IP Reputation",
+            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "0a388e6d-9e6d-48df-b727-5c4e3ff96e0e"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Are Parameters Passed -> Configuration",
             "targetStep": "\/api\/3\/workflow_steps\/4ef5d615-e8c3-47fd-ba10-1dd5f794be54",
             "sourceStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
             "label": "Yes",
             "isExecuted": false,
             "uuid": "245be9f6-555e-4495-a841-1dd71b5147cc"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy of Form Formatted Response -> Send Formatted Response To Slack",
+            "targetStep": "\/api\/3\/workflow_steps\/6256fa5f-f779-4e7a-9aaa-f608fd5c410c",
+            "sourceStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "2917c113-95a0-4dee-872b-da5e5e856f1f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Rep IPStack -> Formatted Response",
+            "targetStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
+            "sourceStep": "\/api\/3\/workflow_steps\/69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "349a96a1-2558-4ffd-91fb-25f5d652c963"
         },
         {
             "@type": "WorkflowRoute",
@@ -302,6 +329,24 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Is Indicator Available -> Create New Indicator",
+            "targetStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "label": "Not available",
+            "isExecuted": false,
+            "uuid": "c169a45f-b1bf-4da9-92d5-201fa49f8464"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create New Indicator -> Get IP Reputation",
+            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c44fbde2-ec08-4e02-8e74-26e7dabd1308"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Are Parameters Passed -> Copy of Response",
             "targetStep": "\/api\/3\/workflow_steps\/22c31e3a-185b-4e92-85d6-eaeb274323ed",
             "sourceStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
@@ -320,57 +365,12 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Create New Indicator -> Get IP Reputation",
-            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
-            "sourceStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "c44fbde2-ec08-4e02-8e74-26e7dabd1308"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Is Indicator Available -> Get IP Reputation",
-            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
-            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
-            "label": "Yes",
-            "isExecuted": false,
-            "uuid": "0a388e6d-9e6d-48df-b727-5c4e3ff96e0e"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Is Indicator Available -> Create New Indicator",
-            "targetStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
-            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
-            "label": "Not available",
-            "isExecuted": false,
-            "uuid": "c169a45f-b1bf-4da9-92d5-201fa49f8464"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Copy of Form Formatted Response -> Send Formatted Response To Slack",
-            "targetStep": "\/api\/3\/workflow_steps\/6256fa5f-f779-4e7a-9aaa-f608fd5c410c",
-            "sourceStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "2917c113-95a0-4dee-872b-da5e5e856f1f"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Get IP Reputation -> Get Rep IPStack",
             "targetStep": "\/api\/3\/workflow_steps\/69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152",
             "sourceStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
             "label": null,
             "isExecuted": false,
             "uuid": "fb83b0e2-e8bb-4b53-a56b-9d43e475c7e2"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get Rep IPStack -> Formatted Response",
-            "targetStep": "\/api\/3\/workflow_steps\/7e902b27-bbfb-4a9e-b541-1f0353375d34",
-            "sourceStep": "\/api\/3\/workflow_steps\/69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "349a96a1-2558-4ffd-91fb-25f5d652c963"
         }
     ],
     "groups": [],

@@ -17,11 +17,11 @@
             },
             {
                 "type": "object",
-                "field": "external_channel_list",
+                "field": "inline_channel_list",
                 "value": [
                     "\/api\/3\/picklists\/afb18b7f-510b-471a-9b9c-7f4646edd4ee"
                 ],
-                "module": "external_channel_list",
+                "module": "inline_channel_list",
                 "display": "",
                 "operator": "in",
                 "template": "multiselectpicklist",
