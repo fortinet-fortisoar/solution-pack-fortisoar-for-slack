@@ -48,6 +48,34 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Config Test",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "iri": "\/api\/integration\/connectors\/healthcheck\/{{vars.item.name}}\/{{vars.item.version}}\/?config={{vars.item.config_id}}",
+                    "body": "",
+                    "method": "GET"
+                },
+                "version": "3.2.3",
+                "for_each": {
+                    "item": "{{vars.config_details}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "1431134b-86c9-4762-a828-4d3ddbfab332"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Parameters Required",
             "description": null,
             "arguments": {
@@ -76,6 +104,33 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "All Connectors Configured",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Not configured",
+                        "step_iri": "\/api\/3\/workflow_steps\/ab42531c-04fd-4c39-9b5c-cc6bbcf1108c",
+                        "condition": "{{ vars.configured < 2 }}",
+                        "step_name": "Connectors not configured"
+                    },
+                    {
+                        "option": "Configured",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+                        "step_name": "Get IP Reputation"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "1245",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
+            "uuid": "5967abce-8671-4242-8886-c9e89dd37a65"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Send Formatted Response To Slack",
             "description": null,
             "arguments": {
@@ -97,7 +152,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1245",
+            "top": "1785",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
@@ -122,8 +177,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "840",
-            "left": "475",
+            "top": "1380",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "6623aa7b-f366-4de2-a5ad-716bac80eadf"
@@ -150,11 +205,36 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "975",
-            "left": "475",
+            "top": "1515",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "69b0dab1-8b4a-4a97-b7f2-f35a3e0f9152"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Connector Configurations",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "iri": "\/api\/integration\/connector_details\/?configured=true&name=virustotal",
+                    "body": "",
+                    "method": "POST"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": {
+                    "config_details": "{% set config = [] %}{% set conn_name = [\"ipstack\", \"virustotal\"] %}{% for item in vars.steps.Get_Connector_Configurations.data.data %}{% if item.name in conn_name %}{% set _ = config.append({ \"version\":item.version,\"name\": item.name, \"id\": item.configuration[0].config_id }) %}{% endif %}{% endfor %}{{config}}"
+                }
+            },
+            "status": null,
+            "top": "840",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "6a4ad305-5a3f-4b18-8187-d6fca971d331"
         },
         {
             "@type": "WorkflowStep",
@@ -164,11 +244,25 @@
                 "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Below is the latest indicator reputation summary for IP {{vars.indicator_val}}:*\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Virus Total Reputation Summary *\\nHarmless Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].harmless}} \\n Malicious Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].malicious}} \\n Suspicious Votes:{{vars.steps.Get_IP_Reputation.data.attributes['last_analysis_stats'].suspicious}} \\n Country: {{vars.steps.Get_IP_Reputation.data.attributes.country}} \\n Regional Internet Registry: {{vars.steps.Get_IP_Reputation.data.attributes['regional_internet_registry']}}\"\n\t\t\t},\n\t\t\t\"accessory\": {\n\t\t\t\t\"type\": \"image\",\n\t\t\t\t\"image_url\": \"https:\/\/res.cloudinary.com\/crunchbase-production\/image\/upload\/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1\/vxwo4yr27optg1jldgjf\",\n\t\t\t\t\"alt_text\": \"alt text for image\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"<{{vars.steps.Get_IP_Reputation.data.links.self}}|View Results In VT>\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*IP Stack Gelocation Summary*\\n Zip:{{vars.steps.Get_Rep_IPStack.data[0].zip}} \\n City:{{vars.steps.Get_Rep_IPStack.data[0].city}}\\n Type:{{vars.steps.Get_Rep_IPStack.data[0].type}}\\n Hostname:{{vars.steps.Get_Rep_IPStack.data[0].hostname}}\\n Latitude:{{vars.steps.Get_Rep_IPStack.data[0].latitude}}\\n Longitude:{{vars.steps.Get_Rep_IPStack.data[0].longitude}}\\n Region Name:23\\n Country Name:{{vars.steps.Get_Rep_IPStack.data[0]['country_name']}}\\n Continent:{{vars.steps.Get_Rep_IPStack.data[0]['continent_name']}}\"\n\t\t\t},\n\t\t\t\"accessory\": {\n\t\t\t\t\"type\": \"image\",\n\t\t\t\t\"image_url\": \"https:\/\/img.stackshare.io\/service\/9074\/ipstack.png\",\n\t\t\t\t\"alt_text\": \"alt text for image\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"type\": \"divider\"\n\t\t}\n\t]"
             },
             "status": null,
+            "top": "1650",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "7e902b27-bbfb-4a9e-b541-1f0353375d34"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Connectors Comfigured",
+            "description": null,
+            "arguments": {
+                "configured": "{% set ns=namespace(config =0) %}{% for item in vars.steps.Config_Test %}{% if item.data._status %}{% set ns.config =ns.config+1%}{% endif %}{% endfor %}{{ns.config}}"
+            },
+            "status": null,
             "top": "1110",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
-            "uuid": "7e902b27-bbfb-4a9e-b541-1f0353375d34"
+            "uuid": "810495dc-bdc1-4524-88e8-469cc714f2db"
         },
         {
             "@type": "WorkflowStep",
@@ -205,9 +299,9 @@
                 "conditions": [
                     {
                         "option": "Yes",
-                        "step_iri": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+                        "step_iri": "\/api\/3\/workflow_steps\/6a4ad305-5a3f-4b18-8187-d6fca971d331",
                         "condition": "{{ vars.steps.Is_Indicator_Present |length > 0 }}",
-                        "step_name": "Get IP Reputation"
+                        "step_name": "Get Connector Configurations"
                     },
                     {
                         "option": "Not available",
@@ -265,23 +359,28 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "720",
-            "left": "820",
+            "top": "700",
+            "left": "760",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "a958cce8-cf06-4153-ba5b-90460792ca16"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Connectors not configured",
+            "description": null,
+            "arguments": {
+                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\"text\": \"The virustotal\/ipstack connector have not been configured\",\n\t\t\t\t\"emoji\": true\n\t\t\t}\n\t\t}\n\t]"
+            },
+            "status": null,
+            "top": "1650",
+            "left": "650",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "ab42531c-04fd-4c39-9b5c-cc6bbcf1108c"
         }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Is Indicator Available -> Get IP Reputation",
-            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
-            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
-            "label": "Yes",
-            "isExecuted": false,
-            "uuid": "0a388e6d-9e6d-48df-b727-5c4e3ff96e0e"
-        },
         {
             "@type": "WorkflowRoute",
             "name": "Are Parameters Passed -> Configuration",
@@ -338,15 +437,6 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Create New Indicator -> Get IP Reputation",
-            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
-            "sourceStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "c44fbde2-ec08-4e02-8e74-26e7dabd1308"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Are Parameters Passed -> Copy of Response",
             "targetStep": "\/api\/3\/workflow_steps\/22c31e3a-185b-4e92-85d6-eaeb274323ed",
             "sourceStep": "\/api\/3\/workflow_steps\/86061fc2-cbef-4473-bfa7-b50e3571c6e6",
@@ -371,6 +461,78 @@
             "label": null,
             "isExecuted": false,
             "uuid": "fb83b0e2-e8bb-4b53-a56b-9d43e475c7e2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Config Test -> Connectors Comfigured",
+            "targetStep": "\/api\/3\/workflow_steps\/810495dc-bdc1-4524-88e8-469cc714f2db",
+            "sourceStep": "\/api\/3\/workflow_steps\/1431134b-86c9-4762-a828-4d3ddbfab332",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "f14d2b27-3fff-4539-a085-d48e1d7fd839"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Connector Configurations -> Config Test",
+            "targetStep": "\/api\/3\/workflow_steps\/1431134b-86c9-4762-a828-4d3ddbfab332",
+            "sourceStep": "\/api\/3\/workflow_steps\/6a4ad305-5a3f-4b18-8187-d6fca971d331",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0d8bc2d0-c937-4e92-a5e0-1170d4a74f08"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Is Indicator Available -> Get Connector Configurations",
+            "targetStep": "\/api\/3\/workflow_steps\/6a4ad305-5a3f-4b18-8187-d6fca971d331",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a0ae81b-1d0c-45d1-a881-531effdb1630",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "5c4d541c-b9de-466d-bd69-bdeea9351956"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Connectors Comfigured -> All Connectors Configured",
+            "targetStep": "\/api\/3\/workflow_steps\/5967abce-8671-4242-8886-c9e89dd37a65",
+            "sourceStep": "\/api\/3\/workflow_steps\/810495dc-bdc1-4524-88e8-469cc714f2db",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6560a121-9985-4090-92e7-1a78e93a169d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Connectors not configured -> Send Formatted Response To Slack",
+            "targetStep": "\/api\/3\/workflow_steps\/6256fa5f-f779-4e7a-9aaa-f608fd5c410c",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab42531c-04fd-4c39-9b5c-cc6bbcf1108c",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "e6519407-546c-43dc-a2eb-d86a54bf2a1c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create New Indicator -> Get Connector Configurations",
+            "targetStep": "\/api\/3\/workflow_steps\/6a4ad305-5a3f-4b18-8187-d6fca971d331",
+            "sourceStep": "\/api\/3\/workflow_steps\/a958cce8-cf06-4153-ba5b-90460792ca16",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "010a71f6-ab66-40b2-80b1-20a4742c9e2c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "All Connectors Configured -> Get IP Reputation",
+            "targetStep": "\/api\/3\/workflow_steps\/6623aa7b-f366-4de2-a5ad-716bac80eadf",
+            "sourceStep": "\/api\/3\/workflow_steps\/5967abce-8671-4242-8886-c9e89dd37a65",
+            "label": "Configured",
+            "isExecuted": false,
+            "uuid": "7414d505-1888-4b7c-a10e-df49a2a3b8e4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "All Connectors Configured -> Connectors not configured",
+            "targetStep": "\/api\/3\/workflow_steps\/ab42531c-04fd-4c39-9b5c-cc6bbcf1108c",
+            "sourceStep": "\/api\/3\/workflow_steps\/5967abce-8671-4242-8886-c9e89dd37a65",
+            "label": "Not configured",
+            "isExecuted": false,
+            "uuid": "b5af0d66-e9f5-493f-8307-fedb766418df"
         }
     ],
     "groups": [],
