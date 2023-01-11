@@ -25,8 +25,8 @@
                 "indicator_val": "{{vars.steps.Manual_Input_Form.input.indicator}}"
             },
             "status": null,
-            "top": "570",
-            "left": "475",
+            "top": "580",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "091bfa45-902c-4289-8813-0808f26a1ff8"
@@ -46,28 +46,28 @@
                     {
                         "option": "Valid",
                         "step_iri": "\/api\/3\/workflow_steps\/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
-                        "condition": "{{ vars.indicator_count > 0 }}",
+                        "condition": "{{ vars.steps.Extract_Artifact.data.results| length > 0 }}",
                         "step_name": "Create Indicator"
                     }
                 ]
             },
             "status": null,
-            "top": "1110",
-            "left": "300",
+            "top": "975",
+            "left": "1010",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
             "group": null,
             "uuid": "0e715216-3a72-444a-bfde-2f418f60d505"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Check Number of Indicator",
+            "name": "Check for blank form submission",
             "description": null,
             "arguments": {
                 "conditions": [
                     {
                         "option": "Params Passed",
                         "step_iri": "\/api\/3\/workflow_steps\/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
-                        "condition": "{{ vars.indicator_val| string | length > 0 }}",
+                        "condition": "{{ (vars.indicator_val != None) }}",
                         "step_name": "Extract Artifact"
                     },
                     {
@@ -80,24 +80,10 @@
             },
             "status": null,
             "top": "705",
-            "left": "475",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
             "group": null,
             "uuid": "117e01d2-5604-4f51-b800-6affa0de51fe"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Indicator variable",
-            "description": null,
-            "arguments": {
-                "indicator_val": "{{vars.indicator_val}}"
-            },
-            "status": null,
-            "top": "570",
-            "left": "1360",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "group": null,
-            "uuid": "1210d0b0-9cc8-475d-b4eb-3557f03acc72"
         },
         {
             "@type": "WorkflowStep",
@@ -107,8 +93,8 @@
                 "bot_response": "The indicator parameters provided were incorrect"
             },
             "status": null,
-            "top": "1380",
-            "left": "825",
+            "top": "1245",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "184093ee-68a9-4f15-8afa-019e99658747"
@@ -142,8 +128,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1245",
-            "left": "475",
+            "top": "1110",
+            "left": "835",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "35b8cf2b-8b74-4e2b-9d20-fc0e588f5689"
@@ -153,11 +139,11 @@
             "name": "Cancel",
             "description": null,
             "arguments": {
-                "bot_response": "\" \""
+                "bot_response": "\"Indicator creation cancelled!\""
             },
             "status": null,
-            "top": "1380",
-            "left": "1175",
+            "top": "1245",
+            "left": "485",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "4dea72b0-041c-4a88-9a66-1d35ecea99cb"
@@ -184,7 +170,7 @@
             },
             "status": null,
             "top": "840",
-            "left": "300",
+            "left": "1010",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "53cdd8f7-068e-4a86-859e-1652ee2e44a3"
@@ -197,8 +183,8 @@
                 "bot_response": "The indicator parameters provided were incorrect"
             },
             "status": null,
-            "top": "1380",
-            "left": "125",
+            "top": "1245",
+            "left": "1185",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "59dd8052-c04f-44b1-a365-9c526e612754"
@@ -214,7 +200,8 @@
                     "blocks": "",
                     "channel": "{{vars.bot_context.user_id}}",
                     "message": "{{vars.bot_response}}",
-                    "thread_ts": "",
+                    "email_id": "",
+                    "thread_ts": "{{vars.bot_context.get('ts','')}}",
                     "attachments": ""
                 },
                 "version": "3.0.0",
@@ -225,8 +212,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1515",
-            "left": "650",
+            "top": "1380",
+            "left": "660",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "5e1e66c2-b89d-48f1-8302-f15165b84993"
@@ -239,8 +226,8 @@
                 "bot_response": "Done! Indicator '{{vars.indicator_val}}' successfully added to the indicator list."
             },
             "status": null,
-            "top": "1380",
-            "left": "475",
+            "top": "1245",
+            "left": "835",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "64a2be62-0a91-432d-9b4c-1f62adf76298"
@@ -307,8 +294,8 @@
                 "unauthenticated_input": true
             },
             "status": null,
-            "top": "440",
-            "left": "640",
+            "top": "360",
+            "left": "620",
             "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
             "group": null,
             "uuid": "6925505d-310b-4f10-80bc-842da7046769"
@@ -326,24 +313,10 @@
             },
             "status": null,
             "top": "30",
-            "left": "743",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
             "group": null,
             "uuid": "978b6805-b07f-4876-b9aa-546ff464c163"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Number of Indicators",
-            "description": null,
-            "arguments": {
-                "indicator_count": "{%set ns = namespace(indicator=0) %}{% for key, value in vars.steps.Extract_Artifact.data.items() %} {% if value | length > 0 %}{%set ns.indicator = 1%}{%endif%} {%endfor%} {{ns.indicator}}"
-            },
-            "status": null,
-            "top": "975",
-            "left": "300",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "group": null,
-            "uuid": "b1b2c2fe-4fca-4726-ac4c-a9ce7c8417d6"
         },
         {
             "@type": "WorkflowStep",
@@ -355,7 +328,7 @@
             },
             "status": null,
             "top": "165",
-            "left": "743",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "d64ec03a-f3d6-43c7-8859-09796e5b5a09"
@@ -374,15 +347,15 @@
                     },
                     {
                         "option": "Yes",
-                        "step_iri": "\/api\/3\/workflow_steps\/1210d0b0-9cc8-475d-b4eb-3557f03acc72",
+                        "step_iri": "\/api\/3\/workflow_steps\/117e01d2-5604-4f51-b800-6affa0de51fe",
                         "condition": "{{ vars.indicator_val | string | length > 0 }}",
-                        "step_name": "Indicator variable"
+                        "step_name": "Check Number of Indicator"
                     }
                 ]
             },
             "status": null,
             "top": "300",
-            "left": "743",
+            "left": "300",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
             "group": null,
             "uuid": "f93ddec2-3394-4095-8f4f-4bbfc2b6f372"
@@ -409,30 +382,12 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Number of Indicators -> Indicator Validation",
-            "targetStep": "\/api\/3\/workflow_steps\/0e715216-3a72-444a-bfde-2f418f60d505",
-            "sourceStep": "\/api\/3\/workflow_steps\/b1b2c2fe-4fca-4726-ac4c-a9ce7c8417d6",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "0aa53480-08f3-482e-92a9-8b07110b15a0"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Cancel -> Response Step",
             "targetStep": "\/api\/3\/workflow_steps\/5e1e66c2-b89d-48f1-8302-f15165b84993",
             "sourceStep": "\/api\/3\/workflow_steps\/4dea72b0-041c-4a88-9a66-1d35ecea99cb",
             "label": null,
             "isExecuted": false,
             "uuid": "16835c2a-0bf9-4486-93a3-0a65efa33014"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Show Manual Input Form Or Not -> Set Indicator",
-            "targetStep": "\/api\/3\/workflow_steps\/1210d0b0-9cc8-475d-b4eb-3557f03acc72",
-            "sourceStep": "\/api\/3\/workflow_steps\/f93ddec2-3394-4095-8f4f-4bbfc2b6f372",
-            "label": "Yes",
-            "isExecuted": false,
-            "uuid": "264bd655-0ac4-47ab-a092-65ee9376980c"
         },
         {
             "@type": "WorkflowRoute",
@@ -478,15 +433,6 @@
             "label": null,
             "isExecuted": false,
             "uuid": "84ed4683-55e9-4bcf-a4c4-641eedefc526"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Extract Artifact -> Number of Indicators",
-            "targetStep": "\/api\/3\/workflow_steps\/b1b2c2fe-4fca-4726-ac4c-a9ce7c8417d6",
-            "sourceStep": "\/api\/3\/workflow_steps\/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "bafcef2e-b74c-4d76-8944-477c4991ffae"
         },
         {
             "@type": "WorkflowRoute",
@@ -553,12 +499,21 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Set Indicator -> Check Length of Indicator",
-            "targetStep": "\/api\/3\/workflow_steps\/117e01d2-5604-4f51-b800-6affa0de51fe",
-            "sourceStep": "\/api\/3\/workflow_steps\/1210d0b0-9cc8-475d-b4eb-3557f03acc72",
+            "name": "Extract Artifact -> Is Valid Indicator",
+            "targetStep": "\/api\/3\/workflow_steps\/0e715216-3a72-444a-bfde-2f418f60d505",
+            "sourceStep": "\/api\/3\/workflow_steps\/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
             "label": null,
             "isExecuted": false,
-            "uuid": "fc95429f-b35d-4f4d-955e-d1f972f66a8d"
+            "uuid": "5eacbd1c-2be1-4bed-9f76-11a1425b9bbd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Are Parameters Passed -> Check Number of Indicator",
+            "targetStep": "\/api\/3\/workflow_steps\/117e01d2-5604-4f51-b800-6affa0de51fe",
+            "sourceStep": "\/api\/3\/workflow_steps\/f93ddec2-3394-4095-8f4f-4bbfc2b6f372",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "78b0946d-71b8-4a5d-87f6-86134c2741e8"
         }
     ],
     "groups": [],

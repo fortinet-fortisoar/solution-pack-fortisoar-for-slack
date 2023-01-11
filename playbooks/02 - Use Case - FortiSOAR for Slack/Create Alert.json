@@ -73,7 +73,7 @@
             "name": "Cancel",
             "description": null,
             "arguments": {
-                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \" \"\n\t\t\t}\n\t\t}\n\t]"
+                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"Alert creation cancelled!\"\n\t\t\t}\n\t\t}\n\t]"
             },
             "status": null,
             "top": "705",
@@ -147,7 +147,7 @@
                                 "tooltip": "",
                                 "dataType": "text",
                                 "formType": "text",
-                                "required": false,
+                                "required": true,
                                 "_expanded": true,
                                 "defaultValue": null,
                                 "_previousName": "alert",
@@ -206,7 +206,7 @@
             },
             "status": null,
             "top": "300",
-            "left": "475",
+            "left": "480",
             "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
             "group": null,
             "uuid": "b0c72f39-09d3-47e0-9a63-e0144fa4e5d3"
