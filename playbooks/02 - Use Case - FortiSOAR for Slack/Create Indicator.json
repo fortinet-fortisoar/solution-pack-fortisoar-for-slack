@@ -225,8 +225,8 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1520",
-            "left": "640",
+            "top": "1515",
+            "left": "650",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "5e1e66c2-b89d-48f1-8302-f15165b84993"
@@ -253,8 +253,8 @@
                 "type": "InputBased",
                 "input": {
                     "schema": {
-                        "title": "Indicator Value",
-                        "description": "Indicator Value",
+                        "title": "Create Indicator",
+                        "description": "Creates an indicator with the given fields in Fortisoar.",
                         "inputVariables": [
                             {
                                 "name": "indicator",
@@ -350,12 +350,12 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "user_id": "{{vars.bot_context.user_id}}",
+                "user_id": "{{vars.bot_context.channel_id}}",
                 "indicator_val": "{{vars.input.params.indicatorVal}}"
             },
             "status": null,
-            "top": "160",
-            "left": "740",
+            "top": "165",
+            "left": "743",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "d64ec03a-f3d6-43c7-8859-09796e5b5a09"
