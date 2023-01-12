@@ -370,7 +370,7 @@
             "name": "Connectors not configured",
             "description": null,
             "arguments": {
-                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\"text\": \"The virustotal\/ipstack connector have not been configured\",\n\t\t\t\t\"emoji\": true\n\t\t\t}\n\t\t}\n\t]"
+                "bot_response": "[\n\t\t{\n\t\t\t\"type\": \"section\",\n\t\t\t\"text\": {\n\t\t\t\t\"type\": \"plain_text\",\n\t\t\t\t\"text\": \"The virustotal\/ipstack connector has not been configured\",\n\t\t\t\t\"emoji\": true\n\t\t\t}\n\t\t}\n\t]"
             },
             "status": null,
             "top": "1650",

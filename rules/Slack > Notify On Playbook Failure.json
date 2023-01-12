@@ -1,0 +1,55 @@
+{
+    "uuid": "fdd73027-c3bc-4f66-9be5-4a7054abfde4",
+    "name": "Slack > Notify On Playbook Failure",
+    "entity_type": "workflow_logs",
+    "event_type": "failed",
+    "trigger_condition": {
+        "sort": [],
+        "limit": 30,
+        "logic": "AND",
+        "filters": [
+            {
+                "type": "array",
+                "field": "recordTags",
+                "value": [
+                    "\/api\/3\/tags\/bot_enabled"
+                ],
+                "module": "recordTags",
+                "display": "",
+                "operator": "in",
+                "template": "tags",
+                "OPERATOR_KEY": "$",
+                "useInOperator": true,
+                "previousOperator": "in",
+                "previousTemplate": "tags"
+            }
+        ]
+    },
+    "actions": [
+        {
+            "type": "connector",
+            "params": {
+                "blocks": [],
+                "channel": "{{vars.input.record.bot_context['user_id']}}",
+                "message": "\"{{vars.input.record.name}}\" Playbook has failed. Please check the \"Executed Playbook Logs\" in FortiSOAR.",
+                "email_id": "",
+                "thread_ts": "",
+                "attachments": ""
+            },
+            "enabled": true,
+            "channel_uuid": "79fb4d6e-d7b1-4e22-9ad4-6a0f96fabaea"
+        }
+    ],
+    "is_system": false,
+    "is_active": true,
+    "priority": 10,
+    "event_source": "sealab",
+    "source": null,
+    "channel_preference_field": null,
+    "visible": true,
+    "category": "generic",
+    "expiry": null,
+    "entity_id": null,
+    "parent_rule": null,
+    "workflow": null
+}
