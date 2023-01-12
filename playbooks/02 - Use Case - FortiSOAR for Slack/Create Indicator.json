@@ -224,7 +224,7 @@
         "name": "Response",
         "description": null,
         "arguments": {
-          "bot_response": "Done! Indicator '{{vars.indicator_val}}' successfully added to the indicator list."
+          "bot_response": "Done! Indicator '<{{vars.indicator_val}}>' successfully added to the indicator list."
         },
         "status": null,
         "top": "1245",
