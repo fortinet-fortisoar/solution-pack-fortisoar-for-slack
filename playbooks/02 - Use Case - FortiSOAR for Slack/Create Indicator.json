@@ -102,7 +102,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Indicator already presemt",
+        "name": "Indicator already present",
         "description": null,
         "arguments": {
           "bot_response": "\"Indicator already present!\""
@@ -399,7 +399,7 @@
               "option": "Present",
               "step_iri": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
               "condition": "{{ (vars.steps.Find_Indicator | length) >  0 }}",
-              "step_name": "Indicator already presemt"
+              "step_name": "Indicator already present"
             },
             {
               "option": "Not Present",
@@ -627,7 +627,7 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Is indicator present -> Indicator already presemt",
+        "name": "Is indicator present -> Indicator already present",
         "targetStep": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
         "sourceStep": "/api/3/workflow_steps/e5b163f6-193f-43e6-aadd-8285948dbca9",
         "label": "Present",
@@ -636,7 +636,7 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Indicator already presemt -> Response Step",
+        "name": "Indicator already present -> Response Step",
         "targetStep": "/api/3/workflow_steps/5e1e66c2-b89d-48f1-8302-f15165b84993",
         "sourceStep": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
         "label": null,
