@@ -13,7 +13,7 @@
       "indicatorVal"
     ],
     "synchronous": false,
-    "lastModifyDate": 1673521224,
+    "lastModifyDate": 1673534566,
     "collection": "/api/3/workflow_collections/49291f43-e8a1-4f63-80b5-d88e05044a4a",
     "versions": [],
     "triggerStep": "/api/3/workflow_steps/978b6805-b07f-4876-b9aa-546ff464c163",
@@ -26,8 +26,8 @@
           "indicator_val": "{{vars.steps.Manual_Input_Form.input.indicator}}"
         },
         "status": null,
-        "top": "570",
-        "left": "908",
+        "top": "560",
+        "left": "960",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "091bfa45-902c-4289-8813-0808f26a1ff8"
@@ -46,15 +46,15 @@
             },
             {
               "option": "Valid",
-              "step_iri": "/api/3/workflow_steps/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
+              "step_iri": "/api/3/workflow_steps/4379893f-4fb8-4fd5-80d7-650a2f5d8947",
               "condition": "{{ vars.steps.Extract_Artifact.data.results| length > 0 }}",
-              "step_name": "Create Indicator"
+              "step_name": "Find Indicator"
             }
           ]
         },
         "status": null,
         "top": "975",
-        "left": "300",
+        "left": "475",
         "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
         "group": null,
         "uuid": "0e715216-3a72-444a-bfde-2f418f60d505"
@@ -80,8 +80,8 @@
           ]
         },
         "status": null,
-        "top": "700",
-        "left": "480",
+        "top": "705",
+        "left": "650",
         "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
         "group": null,
         "uuid": "117e01d2-5604-4f51-b800-6affa0de51fe"
@@ -94,11 +94,25 @@
           "bot_response": "The indicator parameters provided were incorrect"
         },
         "status": null,
-        "top": "1245",
-        "left": "825",
+        "top": "1515",
+        "left": "1175",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "184093ee-68a9-4f15-8afa-019e99658747"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Indicator already presemt",
+        "description": null,
+        "arguments": {
+          "bot_response": "\"Indicator already present!\""
+        },
+        "status": null,
+        "top": "1515",
+        "left": "825",
+        "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+        "group": null,
+        "uuid": "2e0879ec-e5c1-4ae2-9593-33c5df428f48"
       },
       {
         "@type": "WorkflowStep",
@@ -115,13 +129,13 @@
           "resource": {
             "tlp": "/api/3/picklists/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
             "value": "{{vars.item.value}}",
-            "__replace": "",
+            "__replace": "false",
             "indicatorStatus": "/api/3/picklists/2f5cff61-fbff-4bb3-96be-302b78a9fb47",
             "typeofindicator": "{{vars.item['picklist_iri']}}",
             "enrichmentStatus": "/api/3/picklists/a6d9da29-27b1-4b8a-965d-8d91518540d5"
           },
           "operation": "Overwrite",
-          "collection": "/api/3/indicators",
+          "collection": "/api/3/upsert/indicators",
           "__recommend": [],
           "fieldOperation": {
             "recordTags": "Overwrite"
@@ -129,11 +143,40 @@
           "step_variables": []
         },
         "status": null,
-        "top": "1110",
+        "top": "1380",
         "left": "475",
         "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
         "group": null,
         "uuid": "35b8cf2b-8b74-4e2b-9d20-fc0e588f5689"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Find Indicator",
+        "description": null,
+        "arguments": {
+          "query": {
+            "sort": [],
+            "limit": 30,
+            "logic": "AND",
+            "filters": [
+              {
+                "type": "primitive",
+                "field": "value",
+                "value": "{{vars.indicator_val}}",
+                "operator": "eq",
+                "_operator": "eq"
+              }
+            ]
+          },
+          "module": "indicators?$limit=30",
+          "step_variables": []
+        },
+        "status": null,
+        "top": "1110",
+        "left": "650",
+        "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
+        "group": null,
+        "uuid": "4379893f-4fb8-4fd5-80d7-650a2f5d8947"
       },
       {
         "@type": "WorkflowStep",
@@ -143,8 +186,8 @@
           "bot_response": "\"Indicator creation cancelled!\""
         },
         "status": null,
-        "top": "800",
-        "left": "1100",
+        "top": "1660",
+        "left": "1360",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "4dea72b0-041c-4a88-9a66-1d35ecea99cb"
@@ -171,7 +214,7 @@
         },
         "status": null,
         "top": "840",
-        "left": "300",
+        "left": "475",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "53cdd8f7-068e-4a86-859e-1652ee2e44a3"
@@ -184,8 +227,8 @@
           "bot_response": "The indicator parameters provided were incorrect"
         },
         "status": null,
-        "top": "1245",
-        "left": "125",
+        "top": "1660",
+        "left": "200",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "59dd8052-c04f-44b1-a365-9c526e612754"
@@ -213,8 +256,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "1380",
-        "left": "650",
+        "top": "1650",
+        "left": "825",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "5e1e66c2-b89d-48f1-8302-f15165b84993"
@@ -227,7 +270,7 @@
           "bot_response": "Done! Indicator '<{{vars.indicator_val}}>' successfully added to the indicator list."
         },
         "status": null,
-        "top": "1245",
+        "top": "1515",
         "left": "475",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
@@ -295,8 +338,8 @@
           "unauthenticated_input": true
         },
         "status": null,
-        "top": "320",
-        "left": "1100",
+        "top": "440",
+        "left": "1360",
         "stepType": "/api/3/workflow_step_types/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
         "group": null,
         "uuid": "6925505d-310b-4f10-80bc-842da7046769"
@@ -314,19 +357,19 @@
         },
         "status": null,
         "top": "30",
-        "left": "650",
+        "left": "825",
         "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
         "group": null,
         "uuid": "978b6805-b07f-4876-b9aa-546ff464c163"
       },
       {
         "@type": "WorkflowStep",
-        "name": "Placeholder",
+        "name": "Temp Variable",
         "description": null,
         "arguments": [],
         "status": null,
         "top": "570",
-        "left": "300",
+        "left": "475",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "b89256b7-f00b-4234-bc95-e45dfdbd1896"
@@ -341,10 +384,37 @@
         },
         "status": null,
         "top": "165",
-        "left": "650",
+        "left": "825",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "d64ec03a-f3d6-43c7-8859-09796e5b5a09"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Is indicator present",
+        "description": null,
+        "arguments": {
+          "conditions": [
+            {
+              "option": "Present",
+              "step_iri": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
+              "condition": "{{ (vars.steps.Find_Indicator | length) >  0 }}",
+              "step_name": "Indicator already presemt"
+            },
+            {
+              "option": "Not Present",
+              "default": true,
+              "step_iri": "/api/3/workflow_steps/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
+              "step_name": "Create Indicator"
+            }
+          ]
+        },
+        "status": null,
+        "top": "1245",
+        "left": "650",
+        "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+        "group": null,
+        "uuid": "e5b163f6-193f-43e6-aadd-8285948dbca9"
       },
       {
         "@type": "WorkflowStep",
@@ -362,13 +432,13 @@
               "option": "Yes",
               "step_iri": "/api/3/workflow_steps/b89256b7-f00b-4234-bc95-e45dfdbd1896",
               "condition": "{{ ((vars.indicator_val | string).strip() | length) > 0 }}",
-              "step_name": "Placeholder"
+              "step_name": "Temp Variable"
             }
           ]
         },
         "status": null,
         "top": "300",
-        "left": "650",
+        "left": "825",
         "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
         "group": null,
         "uuid": "f93ddec2-3394-4095-8f4f-4bbfc2b6f372"
@@ -392,15 +462,6 @@
         "label": null,
         "isExecuted": false,
         "uuid": "16835c2a-0bf9-4486-93a3-0a65efa33014"
-      },
-      {
-        "@type": "WorkflowRoute",
-        "name": "Configuration -> Show Manual Input Form Or Not",
-        "targetStep": "/api/3/workflow_steps/f93ddec2-3394-4095-8f4f-4bbfc2b6f372",
-        "sourceStep": "/api/3/workflow_steps/d64ec03a-f3d6-43c7-8859-09796e5b5a09",
-        "label": null,
-        "isExecuted": false,
-        "uuid": "5ecfe7cd-3523-4e62-b78d-8a1457a6ca5d"
       },
       {
         "@type": "WorkflowRoute",
@@ -494,15 +555,6 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Indicator Validation -> Create Indicator",
-        "targetStep": "/api/3/workflow_steps/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
-        "sourceStep": "/api/3/workflow_steps/0e715216-3a72-444a-bfde-2f418f60d505",
-        "label": "Valid",
-        "isExecuted": false,
-        "uuid": "f50f058a-460b-4a1a-9b87-9d3d6dcffd90"
-      },
-      {
-        "@type": "WorkflowRoute",
         "name": "Extract Artifact -> Is Valid Indicator",
         "targetStep": "/api/3/workflow_steps/0e715216-3a72-444a-bfde-2f418f60d505",
         "sourceStep": "/api/3/workflow_steps/53cdd8f7-068e-4a86-859e-1652ee2e44a3",
@@ -536,12 +588,70 @@
         "label": "No",
         "isExecuted": false,
         "uuid": "a806fd90-b3ef-4719-bd4c-99f6ce4ac688"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Configuration -> Are Arguments Passed",
+        "targetStep": "/api/3/workflow_steps/f93ddec2-3394-4095-8f4f-4bbfc2b6f372",
+        "sourceStep": "/api/3/workflow_steps/d64ec03a-f3d6-43c7-8859-09796e5b5a09",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "2f21db7b-0e9b-4f49-a563-eac1f5f698f3"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Is Valid Indicator -> Find Indicator",
+        "targetStep": "/api/3/workflow_steps/4379893f-4fb8-4fd5-80d7-650a2f5d8947",
+        "sourceStep": "/api/3/workflow_steps/0e715216-3a72-444a-bfde-2f418f60d505",
+        "label": "Valid",
+        "isExecuted": false,
+        "uuid": "8b5ce892-55d9-490c-8b15-b75813b6415d"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Find Indicator -> Is indicator present",
+        "targetStep": "/api/3/workflow_steps/e5b163f6-193f-43e6-aadd-8285948dbca9",
+        "sourceStep": "/api/3/workflow_steps/4379893f-4fb8-4fd5-80d7-650a2f5d8947",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "e709bcc5-d49f-4d1d-9d8e-c5f78470a4a8"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Is indicator present -> Create Indicator",
+        "targetStep": "/api/3/workflow_steps/35b8cf2b-8b74-4e2b-9d20-fc0e588f5689",
+        "sourceStep": "/api/3/workflow_steps/e5b163f6-193f-43e6-aadd-8285948dbca9",
+        "label": "Not Present",
+        "isExecuted": false,
+        "uuid": "aedbb14a-e809-42d8-8f84-81da69f62236"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Is indicator present -> Indicator already presemt",
+        "targetStep": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
+        "sourceStep": "/api/3/workflow_steps/e5b163f6-193f-43e6-aadd-8285948dbca9",
+        "label": "Present",
+        "isExecuted": false,
+        "uuid": "3674ae5a-abdf-4210-972d-45a630bfcb2e"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Indicator already presemt -> Response Step",
+        "targetStep": "/api/3/workflow_steps/5e1e66c2-b89d-48f1-8302-f15165b84993",
+        "sourceStep": "/api/3/workflow_steps/2e0879ec-e5c1-4ae2-9593-33c5df428f48",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "bf162d60-129e-43d8-b1d8-b4812496034b"
       }
     ],
     "groups": [],
     "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
     "uuid": "a293b1d7-4fef-47a8-8632-cc8893e355e3",
     "id": 476,
+    "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "createDate": 1673513503.887986,
+    "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "modifyDate": 1673534607.063189,
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
