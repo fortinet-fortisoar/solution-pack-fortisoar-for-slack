@@ -39,7 +39,7 @@
                 "blocks": "[ \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"A FortiSOAR playbook is requesting your input.\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"Please provide your input using the following link:  <https:\/\/{{vars.input.record.server_fqhn | ternary(vars.input.record.server_fqhn, globalVars.Server_fqhn)}}\/{{vars.input.record.agent_id | ternary('', 'input')}}?inputId={{vars.input.record.id}}&amp;token={{vars.input.record.token}}|Open input form>\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"Regards,\" \t\t\t} \t\t}, \t\t{ \t\t\t\"type\": \"section\", \t\t\t\"text\": { \t\t\t\t\"type\": \"mrkdwn\", \t\t\t\t\"text\": \"FortiSOAR Admin.\" \t\t\t} \t\t} \t]",
                 "channel": "{{vars.input.record.input.bot_context.user_id}}",
                 "message": "Done!",
-                "email_id": "",
+                "email_id": "{{vars.input.record.owner_details.emailRecipients}}",
                 "thread_ts": "",
                 "attachments": []
             },
