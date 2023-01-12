@@ -321,7 +321,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Temp Variable",
+        "name": "Placeholder",
         "description": null,
         "arguments": [],
         "status": null,
@@ -362,7 +362,7 @@
               "option": "Yes",
               "step_iri": "/api/3/workflow_steps/b89256b7-f00b-4234-bc95-e45dfdbd1896",
               "condition": "{{ ((vars.indicator_val | string).strip() | length) > 0 }}",
-              "step_name": "Temp Variable"
+              "step_name": "Placeholder"
             }
           ]
         },
