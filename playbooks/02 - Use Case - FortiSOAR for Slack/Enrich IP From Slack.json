@@ -138,7 +138,7 @@
                 "config": "63e0e0a1-9762-41f1-b8f8-bb4ccb618c5b",
                 "params": {
                     "blocks": "{{vars.bot_response}}",
-                    "channel": "{{vars.bot_context.user_id}}",
+                    "channel": "{%if vars.bot_context.channel_id %}{{vars.bot_context.channel_id }}{%else%}{{vars.bot_context.user_id}}{%endif%}",
                     "message": "Done!",
                     "email_id": "",
                     "thread_ts": "{{vars.bot_context.get('ts','')}}",

@@ -24,7 +24,7 @@
                 "config": "633e8bd0-a5d0-48a0-addd-2bc7174b9ceb",
                 "params": {
                     "blocks": "{{vars.bot_response}}",
-                    "channel": "{{vars.bot_context.user_id}}",
+                    "channel": "{%if vars.bot_context.channel_id %}{{vars.bot_context.channel_id }}{%else%}{{vars.bot_context.user_id}}{%endif%}",
                     "message": "Block Response",
                     "thread_ts": "{{vars.bot_context.get('ts','')}}",
                     "attachments": ""
