@@ -141,7 +141,7 @@
                     "channel": "{{vars.bot_context.user_id}}",
                     "message": "Done!",
                     "email_id": "",
-                    "thread_ts": "",
+                    "thread_ts": "{{vars.bot_context.get('ts','')}}",
                     "attachments": ""
                 },
                 "version": "3.0.0",

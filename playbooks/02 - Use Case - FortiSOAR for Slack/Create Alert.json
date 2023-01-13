@@ -26,7 +26,7 @@
                     "blocks": "{{vars.bot_response}}",
                     "channel": "{{vars.bot_context.user_id}}",
                     "message": "Block Response",
-                    "thread_ts": "",
+                    "thread_ts": "{{vars.bot_context.get('ts','')}}",
                     "attachments": ""
                 },
                 "version": "3.0.0",
