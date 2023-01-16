@@ -2,7 +2,7 @@
     "uuid": "6fac158d-6f24-4a65-ae1f-0c9565fc710f",
     "type": "connector",
     "name": "Slack",
-    "description": "",
+    "description": "It Sends a Manual Inout Form to the slack application.",
     "config": {
         "label": "Slack",
         "config": "",

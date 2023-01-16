@@ -2,7 +2,7 @@
     "uuid": "79fb4d6e-d7b1-4e22-9ad4-6a0f96fabaea",
     "type": "connector",
     "name": "Slack Link Channel",
-    "description": "",
+    "description": "To send a message to slack when certain rule is met.",
     "config": {
         "label": "Slack",
         "config": "",
