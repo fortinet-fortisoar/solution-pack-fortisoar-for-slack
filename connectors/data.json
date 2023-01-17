@@ -19,7 +19,8 @@
         "operation_roles": [],
         "configurations": [],
         "dataImports": [],
-        "install_mode": "rpm"
+        "install_mode": "rpm",
+        "version": ">= 3.0.0"
     },
     {
         "name": "virustotal",
