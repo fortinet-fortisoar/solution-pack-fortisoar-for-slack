@@ -20,7 +20,7 @@
         "configurations": [],
         "dataImports": [],
         "install_mode": "rpm",
-        "version": ">= 3.0.0"
+        "min_version": "3.0.0"
     },
     {
         "name": "virustotal",
