@@ -39,7 +39,8 @@
         "globalVariables": [],
         "rules": [
             "Slack > Notify For External Manual Input",
-            "Slack > Send Manual Input Link To Slack"
+            "Slack > Send Manual Input Link To Slack",
+            "Slack > Notify On Playbook Failure"
         ],
         "ruleChannels": [
             "Slack",
