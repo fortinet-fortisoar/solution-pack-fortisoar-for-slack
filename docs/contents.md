@@ -37,6 +37,6 @@ Rules provide a framework to define a condition that generates notifications.
 
 | Playbook Name        | Description                                                                                                |
 |:---------------------|:-----------------------------------------------------------------------------------------------------------|
-| Create Indicator     | Extract Indicators from the text provided as Input                                                         |
+| Create Indicator     | Create Indicator/Indicators from the text provided as Input                                                         |
 | Create Alert         | Creates an alert based on the values provided in the form                                                  |
 | Enrich IP From Slack | Reference playbook that gets triggered from Slack based and provides latest reputation formatted for Slack |

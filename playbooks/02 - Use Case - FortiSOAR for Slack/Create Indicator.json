@@ -267,7 +267,7 @@
       "name": "Response",
       "description": null,
       "arguments": {
-        "bot_response": "[\n  {\n    \"type\": \"section\",\n    \"text\": {\n      \"type\": \"plain_text\",\n      \"text\": \"Done! {%if vars.steps.Extract_Artifact.data.results | length >1 %}{%set a = 'Indiactors'%} {%else%}{%set a = 'Indicator'%} {%endif%}{{a}} '{{vars.steps.Extract_Artifact.data.results | json_query('[*][\"value\"][]') | join(', ')}}' created successfully.\"\n    }\n  }\n]"
+        "bot_response": "[\n  {\n    \"type\": \"section\",\n    \"text\": {\n      \"type\": \"plain_text\",\n      \"text\": \"Done! {%if vars.steps.Extract_Artifact.data.results | length >1 %}{%set response = 'Indiactors'%} {%else%}{%set response = 'Indicator'%} {%endif%}{{response}} '{{vars.steps.Extract_Artifact.data.results | json_query('[*][\"value\"][]') | join(', ')}}' created successfully.\"\n    }\n  }\n]"
       },
       "status": null,
       "top": "1620",
