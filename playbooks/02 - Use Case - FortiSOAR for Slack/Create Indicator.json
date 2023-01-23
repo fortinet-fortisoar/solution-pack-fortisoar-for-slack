@@ -13,7 +13,7 @@
     "indicatorVal"
   ],
   "synchronous": false,
-  "lastModifyDate": 1673940441,
+  "lastModifyDate": 1674477666,
   "collection": "/api/3/workflow_collections/49291f43-e8a1-4f63-80b5-d88e05044a4a",
   "versions": [],
   "triggerStep": "/api/3/workflow_steps/978b6805-b07f-4876-b9aa-546ff464c163",
@@ -26,8 +26,8 @@
         "indicator_val": "{{vars.steps.Manual_Input_Form.input.indicator}}"
       },
       "status": null,
-      "top": "560",
-      "left": "960",
+      "top": "580",
+      "left": "1080",
       "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
       "group": null,
       "uuid": "091bfa45-902c-4289-8813-0808f26a1ff8"
@@ -94,7 +94,7 @@
         "bot_response": "[\n  {\n    \"type\": \"section\",\n    \"text\": {\n      \"type\": \"plain_text\",\n      \"text\": \"Blank form submitted.\"\n    }\n  }\n]"
       },
       "status": null,
-      "top": "1420",
+      "top": "1240",
       "left": "1160",
       "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
       "group": null,
@@ -187,7 +187,7 @@
       },
       "status": null,
       "top": "1660",
-      "left": "1360",
+      "left": "1380",
       "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
       "group": null,
       "uuid": "4dea72b0-041c-4a88-9a66-1d35ecea99cb"
@@ -228,7 +228,7 @@
       },
       "status": null,
       "top": "1660",
-      "left": "200",
+      "left": "140",
       "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
       "group": null,
       "uuid": "59dd8052-c04f-44b1-a365-9c526e612754"
@@ -267,11 +267,11 @@
       "name": "Response",
       "description": null,
       "arguments": {
-        "bot_response": "[\n  {\n    \"type\": \"section\",\n    \"text\": {\n      \"type\": \"plain_text\",\n      \"text\": \"Done! Indicator '{{vars.indicator_val}}' successfully added to the indicator list.\"\n    }\n  }\n]"
+        "bot_response": "[\n  {\n    \"type\": \"section\",\n    \"text\": {\n      \"type\": \"plain_text\",\n      \"text\": \"Done! {%if vars.steps.Extract_Artifact.data.results | length >1 %}{%set a = 'Indiactors'%} {%else%}{%set a = 'Indicator'%} {%endif%}{{a}} '{{vars.steps.Extract_Artifact.data.results | json_query('[*][\"value\"][]') | join(', ')}}' created successfully.\"\n    }\n  }\n]"
       },
       "status": null,
-      "top": "1520",
-      "left": "480",
+      "top": "1620",
+      "left": "460",
       "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
       "group": null,
       "uuid": "64a2be62-0a91-432d-9b4c-1f62adf76298"
@@ -338,8 +338,8 @@
         "unauthenticated_input": true
       },
       "status": null,
-      "top": "440",
-      "left": "1360",
+      "top": "460",
+      "left": "1380",
       "stepType": "/api/3/workflow_step_types/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
       "group": null,
       "uuid": "6925505d-310b-4f10-80bc-842da7046769"
@@ -647,15 +647,20 @@
   "groups": [],
   "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
   "uuid": "a293b1d7-4fef-47a8-8632-cc8893e355e3",
-  "id": 476,
+  "id": 524,
   "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-  "createDate": 1673513503.887986,
+  "createDate": 1673956785.098082,
   "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-  "modifyDate": 1673940488.783295,
+  "modifyDate": 1674477718.318213,
   "owners": [],
   "isPrivate": false,
   "deletedAt": null,
   "importedBy": [
+    {
+      "apiName": "fortiSOARForSlack",
+      "name": "FortiSOAR For Slack",
+      "version": "1.0.0"
+    },
     {
       "apiName": "fortiSOARForSlack",
       "name": "FortiSOAR For Slack",
