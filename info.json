@@ -17,7 +17,7 @@
     "publisher": "Fortinet",
     "certified": "true",
     "description": "FortiSOAR for Slack application allows teams to leverage the power of FortiSOAR as part of their daily communications.",
-    "help": null,
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-fortisoar-for-slack/blob/release/1.0.0/README.md",
     "category": [
         "Communication and Coordination"
     ],
