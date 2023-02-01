@@ -26,9 +26,18 @@ Rules provide a framework to define a condition that generates notifications.
 
 | Name                                     | Description                                                                                                                                                          |
 |:-----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Slack > Notify For External Manual Input | It Sends a notification to the slack application when the manual input step for Slack is triggered.                                                                  |
+| Slack > Notify For External Manual Input | It Sends a notification to the slack application when the manual input step for Slack is triggered. |
 | Slack > Notify On Playbook Failure       | Sends an error when a playbook which has `bot_enabled` tag fails. Error: `PlaybookName` Playbook has failed. Please check the *Executed Playbook Logs* in FortiSOAR. |
 | Slack > Send Manual Input Link To Slack  | Sends a link to Slack that can be clicked to get the manual input.                                                                                                   |
+
+When creating notification rules, selecting **Manual Input** as a notification trigger, makes following conditions available:
+- **External Channels (Inline)** - The manual input form appears inline with other FortiSOAR messages in Slack.
+
+    ![](./res/inline-form.png)
+
+- **External Channels (Link)** - The manual input form appears as a link with other FortiSOAR messages in Slack.
+
+    ![](./res/form-as-link.png)
 
 ## Playbook Collection
 
